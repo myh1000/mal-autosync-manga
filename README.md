@@ -9,9 +9,10 @@ Original source code and inspiration from [mal-scrobble](https://github.com/TSed
 
 
 # Installation
+The extension itself is within the ```build/chrome/``` folder.
 
 1. Download the zip file or clone the git repository
-2. Unpack and save to a secure location
+2. Unpack and save **```build/chrome/```** to a secure location
 2. Go to the extension list: chrome://extensions
 3. Activate "Developers Mode"
 4. Click "Load unpacked extension…"
