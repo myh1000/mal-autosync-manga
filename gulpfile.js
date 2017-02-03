@@ -32,11 +32,11 @@ function createTasks (name) {
   gulp.task(`clean-${name}`, () => del(`./build/${name}`, { force: true }))
 
   gulp.task(`build-${name}`, (cb) => {
-    bundle('./src/shared/index.js', `./build/${name}`, {
-      [`./src/${name}/manifest.json`]: '',
-      './src/shared/content.js': '',
-      './src/shared/images/*': 'images',
-      './src/shared/popup/*': 'popup'
+    bundle('./src/index.js', `./build/${name}`, {
+      [`./src/manifest.json`]: '',
+      './src/content.js': '',
+      './src/images/*': 'images',
+      './src/popup/*': 'popup'
     }, cb)
   })
 
