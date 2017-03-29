@@ -3,7 +3,7 @@ import { MediaHandler, MIN_CYCLE } from '../MediaHandler'
 export class KissMangaHandler extends MediaHandler {
 
   accept (url) {
-    return url.indexOf('kissanime.ru') >= 0 && url.indexOf('episode-') >= 0
+    return url.indexOf('kissmanga.com') >= 0 && url.split('/')[3].toLowerCase() === 'manga' && (url.match(/\//g) || []).length > 4
   }
 
   verify (source, cycle, $) {
@@ -13,13 +13,15 @@ export class KissMangaHandler extends MediaHandler {
   parseData (source, $) {
     let title = $('div[id=navsubbar]').find('a').text().trim()
     title = title.split('\n')[1].trim()
-    if (title && title.endsWith('(Sub)')) {
-      title = title.replace('(Sub)', '').trim()
-    } else if (title && title.endsWith('(Dub)')) {
-      title = title.replace('(Dub)', '').trim()
+
+    let episode
+    if ($('#selectReadType option:selected').text() === 'All pages') {
+      episode = $('.selectChapter option:selected')[0].children[0].data.trim()
+    } else {
+      episode = $('#selectChapter option:selected')[0].children[0].data.trim()
     }
-    let episode = $('#selectEpisode option:selected').text()
-    episode = super.parseNumber(episode.replace('\n', '').trim())
+    episode = super.parseChapter(episode)
+
     return { title: title, episode: episode }
   }
 }

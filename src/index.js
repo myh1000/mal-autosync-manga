@@ -4,17 +4,21 @@ const cheerio = require('cheerio')
 import { WebExtension } from './app/WebExtension'
 import { Task } from './app/helpers/Task'
 import { MyAnimeList } from './app/helpers/MyAnimeList'
-import { CrunchyrollHandler } from './app/handlers/CrunchyrollHandler'
-import { KissAnimeHandler } from './app/handlers/KissAnimeHandler'
+import { KissMangaHandler } from './app/handlers/KissMangaHandler'
 
 const HANDLERS = [
-  new CrunchyrollHandler(),
-  new KissAnimeHandler()
+  new KissMangaHandler()
 ]
 
 const READ_CACHE = []
 const INJECTED = []
 const CYCLES = {}
+
+const auth = (user, pass) => {
+  const joined = `${user}:${pass}`
+  const b64 = new Buffer(joined).toString('base64')
+  return `Basic ${b64}`
+}
 
 let inject = (tabId) => {
   // eslint-disable-next-line no-undef
@@ -90,10 +94,10 @@ chrome.runtime.onConnect.addListener((port) => {
       switch (msg.action) {
         case 'auth':
           // eslint-disable-next-line no-undef
-          chrome.storage.local.set({ credentials: { username: msg.username, password: msg.password } }, () => {
+          chrome.storage.local.set({ credentials: { username: msg.username, authorization: auth(msg.username, msg.password) } }, () => {
             checkCredentials()
               .then(storage => {
-                MyAnimeList.authenticate(storage.credentials.username, storage.credentials.password)
+                MyAnimeList.authenticate(storage.credentials.username, storage.credentials.authorization)
                 MyAnimeList.verifyCredentials()
                   .then(result => {
                     let success = (result && result.responseCode === 200)
@@ -146,7 +150,7 @@ console.log('Started background task')
 new Task(() => {
   checkCredentials()
     .then(storage => {
-      MyAnimeList.authenticate(storage.credentials.username, storage.credentials.password)
+      MyAnimeList.authenticate(storage.credentials.username, storage.credentials.authorization)
       lastValidTab()
         .then(tab => {
           let url = tab.url.toLowerCase()
@@ -162,27 +166,23 @@ new Task(() => {
                       let data = handler.parseData(source, $)
                       console.log(`title: ${data.title}`)
                       console.log(`episode: ${data.episode}`)
-                      MyAnimeList.resolveAnimeSearch(data.title)
+                      MyAnimeList.resolveMangaSearch(data.title)
                         .then(result => {
                           console.log(`id: ${result.id}`)
-                          MyAnimeList.checkEpisode(result.id)
+                          MyAnimeList.checkEpisode(result.id, 'manga')
                             .then(epCount => {
-                              console.log('Updating MyAnimeList...')
+                              console.log(`Updating MyAnimeList... MAL count: ${epCount}`)
                               if (data.episode <= epCount) {
                                 console.log('Already up to date')
                                 READ_CACHE.push(url)
                               } else {
-                                let totalEpisodes = parseInt(result.episodes[0])
-                                let status = (data.episode === totalEpisodes ? 2 : 1)
-                                console.log(`totalEpisodes: ${totalEpisodes}`)
+                                let totalChapters = parseInt(result.chapters[0])
+                                let status = (data.episode === totalChapters ? 2 : 1)
                                 console.log(`status: ${status}`)
-                                MyAnimeList.updateAnimeList(result.id, status, data.episode)
+                                MyAnimeList.updateMangaList(result.id, status, data.episode)
                                   .then(res => {
-                                    console.log('Updated!')
+                                    console.log('Updated!', status)
                                     READ_CACHE.push(url)
-                                    if (status === 2) {
-                                      // prompt to rate.. if video isn't visible.
-                                    }
                                   })
                               }
                             })

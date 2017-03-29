@@ -6,12 +6,6 @@ import { Roman } from './Roman'
 import { Promises } from './Promises'
 import { Unicode } from './Unicode'
 
-const auth = (user, pass) => {
-  const joined = `${user}:${pass}`
-  const b64 = new Buffer(joined).toString('base64')
-  return `Basic ${b64}`
-}
-
 const createXMLForm = (json) => {
   let generated = ''
   _.each(json, (val, key) => {
@@ -21,13 +15,13 @@ const createXMLForm = (json) => {
 }
 
 let mUsername = ''
-let mPassword = ''
+let mAuthorization = ''
 
 export class MyAnimeList {
 
-  static authenticate (user, pass) {
+  static authenticate (user, auth) {
     mUsername = user
-    mPassword = pass
+    mAuthorization = auth
   }
 
   static api (suffix) {
@@ -56,7 +50,7 @@ export class MyAnimeList {
         url: apiURL,
         type: 'POST',
         headers: {
-          Authorization: auth(mUsername, mPassword),
+          Authorization: mAuthorization,
           'content-type': 'application/xml'
         },
         form: json
@@ -83,7 +77,10 @@ export class MyAnimeList {
   }
 
   static updateManga (id, json) {
+    console.log(json)
+    console.log(this.useAPI(this.mangalist(`update/${id}.xml`), createXMLForm(json)))
     return this.useAPI(this.mangalist(`update/${id}.xml`), createXMLForm(json))
+    // return this.useAPI(this.animelist(`update/33206.xml`), createXMLForm(json))
   }
 
   static search (apiURL, query) {
@@ -121,6 +118,15 @@ export class MyAnimeList {
     })
   }
 
+  static resolveMangaSearch (title) {
+    let titles = this.findNormalTitles(title)
+    return new Promise((resolve, reject) => {
+      Promises.forceAll(titles.map(aTitle => this.searchManga(aTitle)))
+        .then(results => resolve(results[0]))
+        .catch(err => reject(err))
+    })
+  }
+
   static appinfo (id, type = 'anime') {
     return new Promise((resolve, reject) => {
       let url = `https://myanimelist.net/malappinfo.php?u=${mUsername}&status=1&type=${type}`
@@ -142,7 +148,7 @@ export class MyAnimeList {
     })
   }
 
-  static findListEntry (id, type = 'anime') {
+  static findListEntry (id, type) {
     return new Promise((resolve, reject) => {
       let usingAnime = (type === 'anime')
       this.appinfo(id, type)
@@ -158,7 +164,7 @@ export class MyAnimeList {
     })
   }
 
-  static checkEpisode (id, type = 'anime') {
+  static checkEpisode (id, type) {
     return new Promise((resolve, reject) => {
       let usingAnime = (type === 'anime')
       this.findListEntry(id, type)
@@ -175,7 +181,7 @@ export class MyAnimeList {
 
   static updateAnimeList (id, status, episode) {
     return new Promise((resolve, reject) => {
-      this.findListEntry(id)
+      this.findListEntry(id, 'anime')
         .then(result => {
           if (result !== undefined) {
             this.updateAnime(id, { status, episode })
@@ -183,6 +189,23 @@ export class MyAnimeList {
               .catch(err => reject(err))
           } else {
             this.addAnime(id, { status, episode })
+              .then(res => resolve(res))
+              .catch(err => reject(err))
+          }
+        })
+    })
+  }
+
+  static updateMangaList (id, status, chapter) {
+    return new Promise((resolve, reject) => {
+      this.findListEntry(id, 'manga')
+        .then(result => {
+          if (result !== undefined) {
+            this.updateManga(id, { status, chapter })
+              .then(res => resolve(res))
+              .catch(err => reject(err))
+          } else {
+            this.addManga(id, { status, chapter })
               .then(res => resolve(res))
               .catch(err => reject(err))
           }

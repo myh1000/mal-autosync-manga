@@ -9,7 +9,7 @@
   "keywords": [],
   "license": "MIT",
   "scripts": {
-    "build-chrome": "npm run lint && gulp chrome",
+    "build": "npm run lint && gulp chrome",
     "lint": "eslint src"
   },
   "dependencies": {
