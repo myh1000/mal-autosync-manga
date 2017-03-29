@@ -1,4 +1,4 @@
-export const MIN_CYCLE = (1000 * 10) /* 10 seconds */
+export const MIN_CYCLE = (1000 * 5) /* 10 seconds */
 
 export class MediaHandler {
 
@@ -21,7 +21,7 @@ export class MediaHandler {
   parseNumber (data) {
     return parseInt(data.match(/\d+/g), 10)
   }
-  
+
   parseChapter (string) {
     var result
 

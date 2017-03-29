@@ -5,9 +5,11 @@ import { WebExtension } from './app/WebExtension'
 import { Task } from './app/helpers/Task'
 import { MyAnimeList } from './app/helpers/MyAnimeList'
 import { KissMangaHandler } from './app/handlers/KissMangaHandler'
+import { BatotoHandler } from './app/handlers/BatotoHandler'
 
 const HANDLERS = [
-  new KissMangaHandler()
+  new KissMangaHandler(),
+  new BatotoHandler()
 ]
 
 const READ_CACHE = []
