@@ -77,10 +77,7 @@ export class MyAnimeList {
   }
 
   static updateManga (id, json) {
-    console.log(json)
-    console.log(this.useAPI(this.mangalist(`update/${id}.xml`), createXMLForm(json)))
     return this.useAPI(this.mangalist(`update/${id}.xml`), createXMLForm(json))
-    // return this.useAPI(this.animelist(`update/33206.xml`), createXMLForm(json))
   }
 
   static search (apiURL, query) {
