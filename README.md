@@ -1,4 +1,4 @@
-# mal-autosync-manga - WIP
+# mal-autosync-manga
 mal scrobbler/autosync for manga
 
 There came the need for an extension to update MAL because the one I have for anime, [MAL Updater OS X](https://github.com/myh1000/malupdaterosx-cocoa), would use Chrome's applescript to get a list of tabs (not the active one!) and take the first one that it came upon that matched its search parameter's (eg. KissAnime or Crunchyroll).
@@ -25,5 +25,5 @@ The extension itself is within the ```build/chrome/``` folder.
 git clone https://github.com/myh1000/mal-autosync-manga.git
 cd mal-autosync-manga
 npm install
-npm run build-chrome
+npm run build
 ```
