@@ -12,7 +12,8 @@ export class BatotoHandler extends MediaHandler {
 
   parseData (source, $) {
     let title = $('ul:first-child a', $('.moderation_bar').first()).eq(0)[0].children[0].data.trim()
-    console.log(title)
+    title = title.split('\n')[1].trim()
+
     let episode = $('[name=chapter_select] option:selected')[0].children[0].data.trim()
     episode = super.parseChapter(episode)
 
