@@ -1,8 +1,8 @@
 # patchoulli-chan
 
-![](src/images/icon128.png)
+### mal scrobbler/autosync for manga
 
-###### mal scrobbler/autosync for manga
+![extension icon](src/images/icon128.png)
 
 A browser extension that scrobbles what you're reading with MyAnimeList
 
