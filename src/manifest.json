@@ -1,10 +1,10 @@
 {
   "manifest_version": 2,
 
-  "name": "mal-scrobble",
+  "name": "patchoulli-chan",
   "version": "1.0.0",
-  "description": "Scrobbles what you're reading with MyAnimeList",
-  "homepage_url": "https://github.com/TSedlar/mal-scrobble",
+  "description": "Patchouli manually syncs MyAnimeList with what you're reading",
+  "homepage_url": "https://github.com/myh1000/mal-autosync-manga",
 
   "icons": {
     "16": "images/icon16.png",
@@ -31,10 +31,12 @@
   },
 
   "permissions": [
-    "http://bato.to",
-    "https://bato.to",
-    "http://kissmanga.com",
-    "https://kissmanga.com",
+    "http://bato.to/",
+    "https://bato.to/",
+    "http://kissmanga.com/",
+    "https://kissmanga.com/",
+    "http://myanimelist.net/",
+    "https://myanimelist.net/",
     "background",
     "notifications",
     "tabs",
