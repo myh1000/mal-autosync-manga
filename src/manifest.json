@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "mal-scrobble",
-  "version": "1.4.5",
-  "description": "Scrobbles what you're watching with MyAnimeList",
+  "version": "1.0.0",
+  "description": "Scrobbles what you're reading with MyAnimeList",
   "homepage_url": "https://github.com/TSedlar/mal-scrobble",
 
   "icons": {
@@ -18,7 +18,7 @@
 
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["*://kissmanga.com/*","*://bato.to/*"],
       "js": ["content.js"],
       "run_at": "document_end"
     }
@@ -31,7 +31,10 @@
   },
 
   "permissions": [
-    "<all_urls>",
+    "http://bato.to",
+    "https://bato.to",
+    "http://kissmanga.com",
+    "https://kissmanga.com",
     "background",
     "notifications",
     "tabs",
