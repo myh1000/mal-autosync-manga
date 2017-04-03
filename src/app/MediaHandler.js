@@ -1,4 +1,4 @@
-export const MIN_CYCLE = (1000 * 5) /* 10 seconds */
+export const MIN_CYCLE = (1000 * 2.5) /* 10 seconds */
 
 export class MediaHandler {
 

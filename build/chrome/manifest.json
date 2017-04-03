@@ -3,7 +3,7 @@
 
   "name": "patchoulli-chan",
   "version": "1.0.0",
-  "description": "Patchouli manually syncs MyAnimeList with what you're reading",
+  "description": "Patchouli manually syncs MyAnimeList with what you're reading.",
   "homepage_url": "https://github.com/myh1000/mal-autosync-manga",
 
   "icons": {
