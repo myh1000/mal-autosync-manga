@@ -1,6 +1,6 @@
 # patchouli-chan
 
-## mal scrobbler/autosync for manga
+### mal scrobbler/autosync for manga
 
 ![extension icon](src/images/icon128.png)
 
