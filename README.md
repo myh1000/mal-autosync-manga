@@ -1,10 +1,19 @@
 # patchouli-chan
 
+## Table of Contents
+* [Introduction](#mal-scrobblerautosync-for-manga)
+* [Installation](#Installation)
+* [Adding Support/Contributing](#addingsupportcontributing)
+
 ### mal scrobbler/autosync for manga
 
 ![extension icon](src/images/icon128.png)
 
 A browser extension that scrobbles what you're reading with MyAnimeList
+
+##### Currently Supported Sites:
+* Batoto
+* KissManga
 
 There came the need for an extension to update MAL because the one I have for anime, [MAL Updater OS X](https://github.com/myh1000/malupdaterosx-cocoa), uses Chrome's applescript to get a list of tabs (not necessarily the active one) and take the first one that it came upon that matched its search parameter's (eg. KissAnime or Crunchyroll).
 
@@ -32,3 +41,5 @@ cd mal-autosync-manga
 npm install
 npm run build
 ```
+
+# Adding Support/Contributing
