@@ -2,7 +2,7 @@
 
 ## Table of Contents
 * [Introduction](#mal-scrobblerautosync-for-manga)
-* [Installation](#Installation)
+* [Installation](#installation)
 * [Adding Support/Contributing](#adding-supportcontributing)
 
 ### mal scrobbler/autosync for manga
