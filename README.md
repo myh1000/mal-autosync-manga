@@ -3,7 +3,7 @@
 ## Table of Contents
 * [Introduction](#mal-scrobblerautosync-for-manga)
 * [Installation](#Installation)
-* [Adding Support/Contributing](#addingsupportcontributing)
+* [Adding Support/Contributing](#adding-supportcontributing)
 
 ### mal scrobbler/autosync for manga
 
@@ -11,7 +11,7 @@
 
 A browser extension that scrobbles what you're reading with MyAnimeList
 
-##### Currently Supported Sites:
+#### Currently Supported Sites:
 * Batoto
 * KissManga
 
@@ -43,3 +43,7 @@ npm run build
 ```
 
 # Adding Support/Contributing
+
+Please look under ```src/app/handlers``` for examples as guidance for how to add support for your favorite manga reader.
+
+ Edit ```accept``` and ```parseData``` so the extension runs and syncs only on the manga chapter pages.
