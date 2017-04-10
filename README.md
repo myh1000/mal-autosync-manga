@@ -1,4 +1,4 @@
-# patchoulli-chan
+# patchouli-chan
 
 ### mal scrobbler/autosync for manga
 
