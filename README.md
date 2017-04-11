@@ -4,6 +4,8 @@
 
 ![extension icon](src/images/icon128.png)
 
+Get it on the [Chrome Web Store!](https://chrome.google.com/webstore/detail/patchouli-chan-auto-sync/dinnbkcfnmmhapafnjcknpncdonhmmlf)
+
 ## Table of Contents
 * [Introduction](#currently-supported-sites)
 * [Installation](#installation)
