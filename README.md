@@ -21,6 +21,7 @@ While it may be normal to have only one anime tab open, I typically have tens of
 
 Original source code and inspiration from [mal-scrobble](https://github.com/TSedlar/mal-scrobble).
 
+![](spread.png)
 
 # Installation
 The extension itself is within the ```build/chrome/``` folder.
