@@ -7,9 +7,11 @@
 Get it on the [Chrome Web Store!](https://chrome.google.com/webstore/detail/patchouli-chan-auto-sync/dinnbkcfnmmhapafnjcknpncdonhmmlf)
 
 ## Table of Contents
-* [Introduction](#currently-supported-sites)
+* [Introduction](#introduction)
 * [Installation](#installation)
 * [Adding Support/Contributing](#adding-supportcontributing)
+
+# Introduction
 
 A browser extension that scrobbles what you're reading with MyAnimeList
 
