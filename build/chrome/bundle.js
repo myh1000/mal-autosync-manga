@@ -20685,14 +20685,21 @@ exports.isHtml = function(str) {
 module.exports={
   "_args": [
     [
-      "cheerio@^0.22.0",
-      "/Users/huangfamily/Documents/myh1000/javascript/mal-autosync-manga"
+      {
+        "raw": "cheerio@^0.22.0",
+        "scope": null,
+        "escapedName": "cheerio",
+        "name": "cheerio",
+        "rawSpec": "^0.22.0",
+        "spec": ">=0.22.0 <0.23.0",
+        "type": "range"
+      },
+      "C:\\Users\\michael\\Documents\\mal-autosync-manga"
     ]
   ],
   "_from": "cheerio@>=0.22.0 <0.23.0",
   "_id": "cheerio@0.22.0",
   "_inCache": true,
-  "_installable": true,
   "_location": "/cheerio",
   "_nodeVersion": "6.2.2",
   "_npmOperationalInternal": {
@@ -20700,16 +20707,17 @@ module.exports={
     "tmp": "tmp/cheerio-0.22.0.tgz_1471954900169_0.12557715992443264"
   },
   "_npmUser": {
-    "email": "mattmuelle@gmail.com",
-    "name": "mattmueller"
+    "name": "mattmueller",
+    "email": "mattmuelle@gmail.com"
   },
   "_npmVersion": "3.10.6",
   "_phantomChildren": {},
   "_requested": {
-    "name": "cheerio",
     "raw": "cheerio@^0.22.0",
-    "rawSpec": "^0.22.0",
     "scope": null,
+    "escapedName": "cheerio",
+    "name": "cheerio",
+    "rawSpec": "^0.22.0",
     "spec": ">=0.22.0 <0.23.0",
     "type": "range"
   },
@@ -20720,10 +20728,10 @@ module.exports={
   "_shasum": "a9baa860a3f9b595a6b81b1a86873121ed3a269e",
   "_shrinkwrap": null,
   "_spec": "cheerio@^0.22.0",
-  "_where": "/Users/huangfamily/Documents/myh1000/javascript/mal-autosync-manga",
+  "_where": "C:\\Users\\michael\\Documents\\mal-autosync-manga",
   "author": {
-    "email": "mattmuelle@gmail.com",
     "name": "Matt Mueller",
+    "email": "mattmuelle@gmail.com",
     "url": "mat.io"
   },
   "bugs": {
@@ -20785,20 +20793,20 @@ module.exports={
   "main": "./index.js",
   "maintainers": [
     {
-      "email": "mattmuelle@gmail.com",
-      "name": "mattmueller"
+      "name": "mattmueller",
+      "email": "mattmuelle@gmail.com"
     },
     {
-      "email": "dc@davidchambers.me",
-      "name": "davidchambers"
+      "name": "davidchambers",
+      "email": "dc@davidchambers.me"
     },
     {
-      "email": "mike@mikepennisi.com",
-      "name": "jugglinmike"
+      "name": "jugglinmike",
+      "email": "mike@mikepennisi.com"
     },
     {
-      "email": "me@feedic.com",
-      "name": "feedic"
+      "name": "feedic",
+      "email": "me@feedic.com"
     }
   ],
   "name": "cheerio",
@@ -30001,14 +30009,21 @@ utils.intFromLE = intFromLE;
 module.exports={
   "_args": [
     [
-      "elliptic@^6.0.0",
-      "/Users/huangfamily/Documents/myh1000/javascript/mal-autosync-manga/node_modules/browserify-sign"
+      {
+        "raw": "elliptic@^6.0.0",
+        "scope": null,
+        "escapedName": "elliptic",
+        "name": "elliptic",
+        "rawSpec": "^6.0.0",
+        "spec": ">=6.0.0 <7.0.0",
+        "type": "range"
+      },
+      "C:\\Users\\michael\\Documents\\mal-autosync-manga\\node_modules\\browserify-sign"
     ]
   ],
   "_from": "elliptic@>=6.0.0 <7.0.0",
   "_id": "elliptic@6.4.0",
   "_inCache": true,
-  "_installable": true,
   "_location": "/elliptic",
   "_nodeVersion": "7.0.0",
   "_npmOperationalInternal": {
@@ -30016,16 +30031,17 @@ module.exports={
     "tmp": "tmp/elliptic-6.4.0.tgz_1487798866428_0.30510620190761983"
   },
   "_npmUser": {
-    "email": "fedor@indutny.com",
-    "name": "indutny"
+    "name": "indutny",
+    "email": "fedor@indutny.com"
   },
   "_npmVersion": "3.10.8",
   "_phantomChildren": {},
   "_requested": {
-    "name": "elliptic",
     "raw": "elliptic@^6.0.0",
-    "rawSpec": "^6.0.0",
     "scope": null,
+    "escapedName": "elliptic",
+    "name": "elliptic",
+    "rawSpec": "^6.0.0",
     "spec": ">=6.0.0 <7.0.0",
     "type": "range"
   },
@@ -30037,10 +30053,10 @@ module.exports={
   "_shasum": "cac9af8762c85836187003c8dfe193e5e2eae5df",
   "_shrinkwrap": null,
   "_spec": "elliptic@^6.0.0",
-  "_where": "/Users/huangfamily/Documents/myh1000/javascript/mal-autosync-manga/node_modules/browserify-sign",
+  "_where": "C:\\Users\\michael\\Documents\\mal-autosync-manga\\node_modules\\browserify-sign",
   "author": {
-    "email": "fedor@indutny.com",
-    "name": "Fedor Indutny"
+    "name": "Fedor Indutny",
+    "email": "fedor@indutny.com"
   },
   "bugs": {
     "url": "https://github.com/indutny/elliptic/issues"
@@ -30091,8 +30107,8 @@ module.exports={
   "main": "lib/elliptic.js",
   "maintainers": [
     {
-      "email": "fedor@indutny.com",
-      "name": "indutny"
+      "name": "indutny",
+      "email": "fedor@indutny.com"
     }
   ],
   "name": "elliptic",
@@ -112284,14 +112300,21 @@ Store.prototype.getAllCookies = function(cb) {
 module.exports={
   "_args": [
     [
-      "tough-cookie@~2.3.0",
-      "/Users/huangfamily/Documents/myh1000/javascript/mal-autosync-manga/node_modules/request"
+      {
+        "raw": "tough-cookie@~2.3.0",
+        "scope": null,
+        "escapedName": "tough-cookie",
+        "name": "tough-cookie",
+        "rawSpec": "~2.3.0",
+        "spec": ">=2.3.0 <2.4.0",
+        "type": "range"
+      },
+      "C:\\Users\\michael\\Documents\\mal-autosync-manga\\node_modules\\request"
     ]
   ],
   "_from": "tough-cookie@>=2.3.0 <2.4.0",
   "_id": "tough-cookie@2.3.2",
   "_inCache": true,
-  "_installable": true,
   "_location": "/tough-cookie",
   "_nodeVersion": "7.0.0",
   "_npmOperationalInternal": {
@@ -112299,16 +112322,17 @@ module.exports={
     "tmp": "tmp/tough-cookie-2.3.2.tgz_1477415232912_0.6133609430398792"
   },
   "_npmUser": {
-    "email": "jstash@gmail.com",
-    "name": "jstash"
+    "name": "jstash",
+    "email": "jstash@gmail.com"
   },
   "_npmVersion": "3.10.8",
   "_phantomChildren": {},
   "_requested": {
-    "name": "tough-cookie",
     "raw": "tough-cookie@~2.3.0",
-    "rawSpec": "~2.3.0",
     "scope": null,
+    "escapedName": "tough-cookie",
+    "name": "tough-cookie",
+    "rawSpec": "~2.3.0",
     "spec": ">=2.3.0 <2.4.0",
     "type": "range"
   },
@@ -112319,10 +112343,10 @@ module.exports={
   "_shasum": "f081f76e4c85720e6c37a5faced737150d84072a",
   "_shrinkwrap": null,
   "_spec": "tough-cookie@~2.3.0",
-  "_where": "/Users/huangfamily/Documents/myh1000/javascript/mal-autosync-manga/node_modules/request",
+  "_where": "C:\\Users\\michael\\Documents\\mal-autosync-manga\\node_modules\\request",
   "author": {
-    "email": "jstashewsky@salesforce.com",
-    "name": "Jeremy Stashewsky"
+    "name": "Jeremy Stashewsky",
+    "email": "jstashewsky@salesforce.com"
   },
   "bugs": {
     "url": "https://github.com/salesforce/tough-cookie/issues"
@@ -112383,16 +112407,16 @@ module.exports={
   "main": "./lib/cookie",
   "maintainers": [
     {
-      "email": "awaterma@awaterma.net",
-      "name": "awaterma"
+      "name": "awaterma",
+      "email": "awaterma@awaterma.net"
     },
     {
-      "email": "jstash@gmail.com",
-      "name": "jstash"
+      "name": "jstash",
+      "email": "jstash@gmail.com"
     },
     {
-      "email": "emily@contactvibe.com",
-      "name": "nexxy"
+      "name": "nexxy",
+      "email": "emily@contactvibe.com"
     }
   ],
   "name": "tough-cookie",
