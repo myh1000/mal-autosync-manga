@@ -11,7 +11,7 @@ const source = require('vinyl-source-stream')
 
 function bundle (indexFile, dir, deps, cb) {
   let stream = merge2(
-    browserify(indexFile, { debug: true })
+    browserify(indexFile, { debug: false })
       .transform(babelify)
       .bundle()
       .pipe(source('bundle.js'))
@@ -46,3 +46,4 @@ function createTasks (name) {
 }
 
 createTasks('chrome')
+createTasks('firefox')

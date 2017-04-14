@@ -29,7 +29,7 @@
       span.author {
         display: inline;
         float: right;
-        padding-bottom: 5px;
+        padding-bottom: 15px;
       }
       a:link, :visited, :active {
         color: #52A0B7;
@@ -40,12 +40,14 @@
     </style>
   </head>
   <body>
-    <label for="user">Username:</label>
+    <div style="text-align:center;">
+    <label for="user" style="margin-top: 12px;">Username:</label>
     <input type="text" id="user"><br><br>
     <label for="pass">Password:</label>
     <input type="password" id="pass"><br><br>
     <input type="submit" id="save" value="Save credentials" /><br><br>
     <label for="user">Just login and start reading!</label>
+    </div>
     <span class="author"><a href="https://github.com/myh1000/mal-autosync-manga/#currently-supported-sites" target="blank">See Supported Sites</a></span>
     <script src="popup.js"></script>
   </body>

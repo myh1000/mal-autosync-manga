@@ -10,6 +10,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npm run lint && gulp chrome",
+    "buildf": "npm run lint && gulp firefox",
     "lint": "eslint src"
   },
   "dependencies": {
