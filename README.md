@@ -44,7 +44,7 @@ The extension itself is within the ```build/chrome/``` folder.
 git clone https://github.com/myh1000/mal-autosync-manga.git
 cd mal-autosync-manga
 npm install
-npm run build
+npm run build (buildf for firefox)
 ```
 
 # Adding Support/Contributing

@@ -167,7 +167,7 @@ new Task(() => {
                     if (handler.verify(source, CYCLES[url], $)) {
                       let data = handler.parseData(source, $)
                       console.log(`title: ${data.title}`)
-                      console.log(`episode: ${data.episode}`)
+                      console.log(`chapter: ${data.episode}`)
                       MyAnimeList.resolveMangaSearch(data.title)
                         .then(result => {
                           console.log(`id: ${result.id}`)
