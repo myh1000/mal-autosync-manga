@@ -4,7 +4,7 @@
 
 ![extension icon](src/images/icon128.png)
 
-Get it on the [Chrome Web Store!](https://chrome.google.com/webstore/detail/patchouli-chan-auto-sync/dinnbkcfnmmhapafnjcknpncdonhmmlf)
+Get it on the [Chrome Web Store](https://chrome.google.com/webstore/detail/patchouli-chan-auto-sync/dinnbkcfnmmhapafnjcknpncdonhmmlf) and [Mozilla Add-ons](https://addons.mozilla.org/en-US/firefox/addon/patchouli-chan/)!
 
 ## Table of Contents
 * [Introduction](#introduction)
@@ -28,15 +28,27 @@ Original source code and inspiration from [mal-scrobble](https://github.com/TSed
 ![](spread.png)
 
 # Installation
+
+## Chrome
 The extension itself is within the ```build/chrome/``` folder.
 
 1. Download the zip file or clone the git repository
 2. Unpack and save **```build/chrome/```** to a secure location
-2. Go to the extension list: chrome://extensions
-3. Activate "Developers Mode"
-4. Click "Load unpacked extension…"
-5. Select the folder with the extension and enjoy
+3. Go to the extension list: chrome://extensions
+4. Activate "Developers Mode"
+5. Click "Load unpacked extension…"
+6. Select the folder with the extension and enjoy
 
+## Firefox
+The extension itself is within the ```build/firefox/``` folder.
+
+1. Download the zip file or clone the git repository
+2. Unpack and save **```build/firefox/```** to a secure location
+3. Go to about:debugging
+4. Click "Load Temporary Add-on"
+5. Select manifest.json and enjoy 
+
+**OR** load from the xpi at ```build/firefox/web-ext-artifacts/*.xpi```
 
 ## Building from source
 
