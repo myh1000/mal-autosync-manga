@@ -6,10 +6,12 @@ import { Task } from './app/helpers/Task'
 import { MyAnimeList } from './app/helpers/MyAnimeList'
 import { KissMangaHandler } from './app/handlers/KissMangaHandler'
 import { BatotoHandler } from './app/handlers/BatotoHandler'
+import { NineAnimeHandler } from './app/handlers/9animeHandler'
 
 const HANDLERS = [
   new KissMangaHandler(),
-  new BatotoHandler()
+  new BatotoHandler(),
+  new NineAnimeHandler()
 ]
 
 const READ_CACHE = []

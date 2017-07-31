@@ -119219,7 +119219,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var MIN_CYCLE = exports.MIN_CYCLE = 1000 * 2.5; /* 10 seconds */
+var MIN_CYCLE = exports.MIN_CYCLE = 1000 * 10; /* 10 seconds */
 
 var MediaHandler = exports.MediaHandler = function () {
   function MediaHandler() {
@@ -119374,6 +119374,60 @@ var WebExtension = exports.WebExtension = function () {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.NineAnimeHandler = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _MediaHandler2 = require('../MediaHandler');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NineAnimeHandler = exports.NineAnimeHandler = function (_MediaHandler) {
+  _inherits(NineAnimeHandler, _MediaHandler);
+
+  function NineAnimeHandler() {
+    _classCallCheck(this, NineAnimeHandler);
+
+    return _possibleConstructorReturn(this, (NineAnimeHandler.__proto__ || Object.getPrototypeOf(NineAnimeHandler)).apply(this, arguments));
+  }
+
+  _createClass(NineAnimeHandler, [{
+    key: 'accept',
+    value: function accept(url) {
+      return url.indexOf('9anime.to') >= 0 && url.indexOf('watch') >= 0;
+    }
+  }, {
+    key: 'verify',
+    value: function verify(source, cycle, $) {
+      return _get(NineAnimeHandler.prototype.__proto__ || Object.getPrototypeOf(NineAnimeHandler.prototype), 'lifeOf', this).call(this, cycle) > _MediaHandler2.MIN_CYCLE;
+    }
+  }, {
+    key: 'parseData',
+    value: function parseData(source, $) {
+      var title = $('h1.title')[0].children[0].data.trim();
+
+      var episode = $('.episodes.active li .active')[0].children[0].data.trim();
+      episode = _get(NineAnimeHandler.prototype.__proto__ || Object.getPrototypeOf(NineAnimeHandler.prototype), 'parseChapter', this).call(this, episode);
+
+      return { title: title, episode: episode };
+    }
+  }]);
+
+  return NineAnimeHandler;
+}(_MediaHandler2.MediaHandler);
+
+},{"../MediaHandler":570}],573:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.BatotoHandler = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -119423,7 +119477,7 @@ var BatotoHandler = exports.BatotoHandler = function (_MediaHandler) {
   return BatotoHandler;
 }(_MediaHandler2.MediaHandler);
 
-},{"../MediaHandler":570}],573:[function(require,module,exports){
+},{"../MediaHandler":570}],574:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -119483,7 +119537,7 @@ var KissMangaHandler = exports.KissMangaHandler = function (_MediaHandler) {
   return KissMangaHandler;
 }(_MediaHandler2.MediaHandler);
 
-},{"../MediaHandler":570}],574:[function(require,module,exports){
+},{"../MediaHandler":570}],575:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -119822,7 +119876,7 @@ var MyAnimeList = exports.MyAnimeList = function () {
   return MyAnimeList;
 }();
 
-},{"./Promises":575,"./Roman":576,"./Unicode":578,"lodash":405,"request":471,"xml2js":551}],575:[function(require,module,exports){
+},{"./Promises":576,"./Roman":577,"./Unicode":579,"lodash":405,"request":471,"xml2js":551}],576:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -119895,7 +119949,7 @@ var Promises = exports.Promises = function () {
   return Promises;
 }();
 
-},{"lodash":405}],576:[function(require,module,exports){
+},{"lodash":405}],577:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -119952,7 +120006,7 @@ var Roman = exports.Roman = function () {
   return Roman;
 }();
 
-},{}],577:[function(require,module,exports){
+},{}],578:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -119991,7 +120045,7 @@ var Task = function () {
 
 exports.Task = Task;
 
-},{}],578:[function(require,module,exports){
+},{}],579:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -120029,7 +120083,7 @@ var Unicode = exports.Unicode = function () {
   return Unicode;
 }();
 
-},{"lodash":405}],579:[function(require,module,exports){
+},{"lodash":405}],580:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -120047,11 +120101,13 @@ var _KissMangaHandler = require('./app/handlers/KissMangaHandler');
 
 var _BatotoHandler = require('./app/handlers/BatotoHandler');
 
+var _animeHandler = require('./app/handlers/9animeHandler');
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var cheerio = require('cheerio');
 
-var HANDLERS = [new _KissMangaHandler.KissMangaHandler(), new _BatotoHandler.BatotoHandler()];
+var HANDLERS = [new _KissMangaHandler.KissMangaHandler(), new _BatotoHandler.BatotoHandler(), new _animeHandler.NineAnimeHandler()];
 
 var READ_CACHE = [];
 var INJECTED = [];
@@ -120242,4 +120298,4 @@ new _Task.Task(function () {
 }, 10000).start();
 
 }).call(this,require("buffer").Buffer)
-},{"./app/WebExtension":571,"./app/handlers/BatotoHandler":572,"./app/handlers/KissMangaHandler":573,"./app/helpers/MyAnimeList":574,"./app/helpers/Task":577,"buffer":104,"cheerio":107,"lodash":405}]},{},[579]);
+},{"./app/WebExtension":571,"./app/handlers/9animeHandler":572,"./app/handlers/BatotoHandler":573,"./app/handlers/KissMangaHandler":574,"./app/helpers/MyAnimeList":575,"./app/helpers/Task":578,"buffer":104,"cheerio":107,"lodash":405}]},{},[580]);
