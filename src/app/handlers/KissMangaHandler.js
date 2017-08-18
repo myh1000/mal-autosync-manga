@@ -22,6 +22,6 @@ export class KissMangaHandler extends MediaHandler {
     }
     episode = super.parseChapter(episode)
 
-    return { title: title, episode: episode }
+    return { source: 'KissManga', title: title, episode: episode }
   }
 }

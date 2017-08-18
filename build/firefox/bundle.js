@@ -119415,7 +119415,7 @@ var NineAnimeHandler = exports.NineAnimeHandler = function (_MediaHandler) {
       var episode = $('.episodes.active li .active')[0].children[0].data.trim();
       episode = _get(NineAnimeHandler.prototype.__proto__ || Object.getPrototypeOf(NineAnimeHandler.prototype), 'parseChapter', this).call(this, episode);
 
-      return { title: title, episode: episode };
+      return { source: '9anime', title: title, episode: episode };
     }
   }]);
 
@@ -119470,7 +119470,7 @@ var BatotoHandler = exports.BatotoHandler = function (_MediaHandler) {
       var episode = $('[name=chapter_select] option:selected')[0].children[0].data.trim();
       episode = _get(BatotoHandler.prototype.__proto__ || Object.getPrototypeOf(BatotoHandler.prototype), 'parseChapter', this).call(this, episode);
 
-      return { title: title, episode: episode };
+      return { source: 'Batoto', title: title, episode: episode };
     }
   }]);
 
@@ -119530,7 +119530,7 @@ var KissMangaHandler = exports.KissMangaHandler = function (_MediaHandler) {
       }
       episode = _get(KissMangaHandler.prototype.__proto__ || Object.getPrototypeOf(KissMangaHandler.prototype), 'parseChapter', this).call(this, episode);
 
-      return { title: title, episode: episode };
+      return { source: 'KissManga', title: title, episode: episode };
     }
   }]);
 
@@ -120257,26 +120257,48 @@ new _Task.Task(function () {
               console.log('life: ' + handler.lifeOf(CYCLES[url]));
               if (handler.verify(source, CYCLES[url], $)) {
                 var data = handler.parseData(source, $);
+                console.log('source: ' + data.source);
                 console.log('title: ' + data.title);
                 console.log('chapter: ' + data.episode);
-                _MyAnimeList.MyAnimeList.resolveMangaSearch(data.title).then(function (result) {
-                  console.log('id: ' + result.id);
-                  _MyAnimeList.MyAnimeList.checkEpisode(result.id, 'manga').then(function (epCount) {
-                    console.log('Updating MyAnimeList... MAL count: ' + epCount);
-                    if (data.episode <= epCount) {
-                      console.log('Already up to date');
-                      READ_CACHE.push(url);
-                    } else {
-                      var totalChapters = parseInt(result.chapters[0]);
-                      var status = data.episode === totalChapters ? 2 : 1;
-                      console.log('status: ' + status);
-                      _MyAnimeList.MyAnimeList.updateMangaList(result.id, status, data.episode).then(function (res) {
-                        console.log('Updated!', status);
+                if (data.source === '9anime') {
+                  _MyAnimeList.MyAnimeList.resolveAnimeSearch(data.title).then(function (result) {
+                    console.log('id: ' + result.id);
+                    _MyAnimeList.MyAnimeList.checkEpisode(result.id, 'anime').then(function (epCount) {
+                      console.log('Updating MyAnimeList... MAL count: ' + epCount);
+                      if (data.episode <= epCount) {
+                        console.log('Already up to date');
                         READ_CACHE.push(url);
-                      });
-                    }
+                      } else {
+                        var totalEpisodes = parseInt(result.episodes[0]);
+                        var status = data.episode === totalEpisodes ? 2 : 1;
+                        console.log('status: ' + status);
+                        _MyAnimeList.MyAnimeList.updateAnimeList(result.id, status, data.episode).then(function (res) {
+                          console.log('Updated!', status);
+                          READ_CACHE.push(url);
+                        });
+                      }
+                    });
                   });
-                });
+                } else {
+                  _MyAnimeList.MyAnimeList.resolveMangaSearch(data.title).then(function (result) {
+                    console.log('id: ' + result.id);
+                    _MyAnimeList.MyAnimeList.checkEpisode(result.id, 'manga').then(function (epCount) {
+                      console.log('Updating MyAnimeList... MAL count: ' + epCount);
+                      if (data.episode <= epCount) {
+                        console.log('Already up to date');
+                        READ_CACHE.push(url);
+                      } else {
+                        var totalChapters = parseInt(result.chapters[0]);
+                        var status = data.episode === totalChapters ? 2 : 1;
+                        console.log('status: ' + status);
+                        _MyAnimeList.MyAnimeList.updateMangaList(result.id, status, data.episode).then(function (res) {
+                          console.log('Updated!', status);
+                          READ_CACHE.push(url);
+                        });
+                      }
+                    });
+                  });
+                }
               }
             });
           }

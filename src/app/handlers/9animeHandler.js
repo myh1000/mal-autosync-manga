@@ -16,6 +16,6 @@ export class NineAnimeHandler extends MediaHandler {
     let episode = $('.episodes.active li .active')[0].children[0].data.trim()
     episode = super.parseChapter(episode)
 
-    return { title: title, episode: episode }
+    return { source: '9anime', title: title, episode: episode }
   }
 }

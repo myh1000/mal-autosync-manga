@@ -168,22 +168,24 @@ new Task(() => {
                     console.log(`life: ${handler.lifeOf(CYCLES[url])}`)
                     if (handler.verify(source, CYCLES[url], $)) {
                       let data = handler.parseData(source, $)
+                      console.log(`source: ${data.source}`)
                       console.log(`title: ${data.title}`)
                       console.log(`chapter: ${data.episode}`)
-                      MyAnimeList.resolveMangaSearch(data.title)
+                      if (data.source === '9anime') {
+                        MyAnimeList.resolveAnimeSearch(data.title)
                         .then(result => {
                           console.log(`id: ${result.id}`)
-                          MyAnimeList.checkEpisode(result.id, 'manga')
+                          MyAnimeList.checkEpisode(result.id, 'anime')
                             .then(epCount => {
                               console.log(`Updating MyAnimeList... MAL count: ${epCount}`)
                               if (data.episode <= epCount) {
                                 console.log('Already up to date')
                                 READ_CACHE.push(url)
                               } else {
-                                let totalChapters = parseInt(result.chapters[0])
-                                let status = (data.episode === totalChapters ? 2 : 1)
+                                let totalEpisodes = parseInt(result.episodes[0])
+                                let status = (data.episode === totalEpisodes ? 2 : 1)
                                 console.log(`status: ${status}`)
-                                MyAnimeList.updateMangaList(result.id, status, data.episode)
+                                MyAnimeList.updateAnimeList(result.id, status, data.episode)
                                   .then(res => {
                                     console.log('Updated!', status)
                                     READ_CACHE.push(url)
@@ -191,6 +193,29 @@ new Task(() => {
                               }
                             })
                         })
+                      } else {
+                        MyAnimeList.resolveMangaSearch(data.title)
+                          .then(result => {
+                            console.log(`id: ${result.id}`)
+                            MyAnimeList.checkEpisode(result.id, 'manga')
+                              .then(epCount => {
+                                console.log(`Updating MyAnimeList... MAL count: ${epCount}`)
+                                if (data.episode <= epCount) {
+                                  console.log('Already up to date')
+                                  READ_CACHE.push(url)
+                                } else {
+                                  let totalChapters = parseInt(result.chapters[0])
+                                  let status = (data.episode === totalChapters ? 2 : 1)
+                                  console.log(`status: ${status}`)
+                                  MyAnimeList.updateMangaList(result.id, status, data.episode)
+                                    .then(res => {
+                                      console.log('Updated!', status)
+                                      READ_CACHE.push(url)
+                                    })
+                                }
+                              })
+                          })
+                      }
                     }
                   })
               }

@@ -17,6 +17,6 @@ export class BatotoHandler extends MediaHandler {
     let episode = $('[name=chapter_select] option:selected')[0].children[0].data.trim()
     episode = super.parseChapter(episode)
 
-    return { title: title, episode: episode }
+    return { source: 'Batoto', title: title, episode: episode }
   }
 }

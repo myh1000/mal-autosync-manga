@@ -1,6 +1,6 @@
 {
   "name": "patchouli-chan",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "A browser extension that scrobbles what you're reading with MyAnimeList",
   "repository": {
     "type": "git",
