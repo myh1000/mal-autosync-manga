@@ -1,0 +1,49 @@
+{
+  "manifest_version": 2,
+
+  "name": "patchouli-chan: auto-sync your MAL",
+  "short_name": "patchouli-chan",
+  "version": "1.0.5",
+  "author": "myh1000",
+  "description": "patchouli-chan manually syncs MyAnimeList with what you're reading.",
+  "homepage_url": "https://github.com/myh1000/mal-autosync-manga",
+
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+
+  "background": {
+    "scripts": ["bundle.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://kissmanga.com/*","*://bato.to/*","*://9anime.to/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "browser_action": {
+    "default_icon": "images/icon48.png",
+    "default_title": "mal-scrobble",
+    "default_popup": "popup/popup.html"
+  },
+
+  "permissions": [
+    "http://bato.to/",
+    "https://bato.to/",
+    "http://9anime.to/",
+    "https://9anime.to/",
+    "http://kissmanga.com/",
+    "https://kissmanga.com/",
+    "http://myanimelist.net/",
+    "https://myanimelist.net/",
+    "background",
+    "notifications",
+    "tabs",
+    "storage"
+  ]
+}
