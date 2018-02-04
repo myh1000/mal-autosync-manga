@@ -6,11 +6,13 @@ import { Task } from './app/helpers/Task'
 import { MyAnimeList } from './app/helpers/MyAnimeList'
 import { KissMangaHandler } from './app/handlers/KissMangaHandler'
 import { BatotoHandler } from './app/handlers/BatotoHandler'
+import { MangaDexHandler } from './app/handlers/MangaDexHandler'
 import { NineAnimeHandler } from './app/handlers/9animeHandler'
 
 const HANDLERS = [
   new KissMangaHandler(),
   new BatotoHandler(),
+  new MangaDexHandler(),
   new NineAnimeHandler()
 ]
 
@@ -187,7 +189,11 @@ new Task(() => {
                                 console.log(`status: ${status}`)
                                 MyAnimeList.updateAnimeList(result.id, status, data.episode)
                                   .then(res => {
-                                    console.log('Updated!', status)
+                                    if (res.responseCode === 200) {
+                                      console.log('Updated!', status)
+                                    } else {
+                                      console.log('Error!', res)
+                                    }
                                     READ_CACHE.push(url)
                                   })
                               }
@@ -209,7 +215,11 @@ new Task(() => {
                                   console.log(`status: ${status}`)
                                   MyAnimeList.updateMangaList(result.id, status, data.episode)
                                     .then(res => {
-                                      console.log('Updated!', status)
+                                      if (res.responseCode === 200) {
+                                        console.log('Updated!', status)
+                                      } else {
+                                        console.log('Error!', res)
+                                      }
                                       READ_CACHE.push(url)
                                     })
                                 }

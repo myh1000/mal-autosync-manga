@@ -119219,7 +119219,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var MIN_CYCLE = exports.MIN_CYCLE = 1000 * 10; /* 10 seconds */
+var MIN_CYCLE = exports.MIN_CYCLE = 1000 * 7; /* 7 seconds */
 
 var MediaHandler = exports.MediaHandler = function () {
   function MediaHandler() {
@@ -119400,7 +119400,7 @@ var NineAnimeHandler = exports.NineAnimeHandler = function (_MediaHandler) {
   _createClass(NineAnimeHandler, [{
     key: 'accept',
     value: function accept(url) {
-      return url.indexOf('9anime.to') >= 0 && url.indexOf('watch') >= 0;
+      return url.indexOf('9anime.is') >= 0 && url.indexOf('watch') >= 0;
     }
   }, {
     key: 'verify',
@@ -119410,9 +119410,8 @@ var NineAnimeHandler = exports.NineAnimeHandler = function (_MediaHandler) {
   }, {
     key: 'parseData',
     value: function parseData(source, $) {
-      var title = $('h1.title')[0].children[0].data.trim();
-
-      var episode = $('.episodes.active li .active')[0].children[0].data.trim();
+      var title = $("h1[class='title']").text();
+      var episode = parseInt($("ul[class~='episodes'] > li > a[class='active']").text());
       episode = _get(NineAnimeHandler.prototype.__proto__ || Object.getPrototypeOf(NineAnimeHandler.prototype), 'parseChapter', this).call(this, episode);
 
       return { source: '9anime', title: title, episode: episode };
@@ -119538,6 +119537,60 @@ var KissMangaHandler = exports.KissMangaHandler = function (_MediaHandler) {
 }(_MediaHandler2.MediaHandler);
 
 },{"../MediaHandler":570}],575:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MangaDexHandler = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _MediaHandler2 = require('../MediaHandler');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MangaDexHandler = exports.MangaDexHandler = function (_MediaHandler) {
+  _inherits(MangaDexHandler, _MediaHandler);
+
+  function MangaDexHandler() {
+    _classCallCheck(this, MangaDexHandler);
+
+    return _possibleConstructorReturn(this, (MangaDexHandler.__proto__ || Object.getPrototypeOf(MangaDexHandler)).apply(this, arguments));
+  }
+
+  _createClass(MangaDexHandler, [{
+    key: 'accept',
+    value: function accept(url) {
+      return url.indexOf('mangadex.com') >= 0 && url.split('/')[3].toLowerCase() === 'chapter' && (url.match(/\//g) || []).length === 5;
+    }
+  }, {
+    key: 'verify',
+    value: function verify(source, cycle, $) {
+      return _get(MangaDexHandler.prototype.__proto__ || Object.getPrototypeOf(MangaDexHandler.prototype), 'lifeOf', this).call(this, cycle) > _MediaHandler2.MIN_CYCLE;
+    }
+  }, {
+    key: 'parseData',
+    value: function parseData(source, $) {
+      var title = $('div[id=content]').find('a')[0].children[0].data.trim();
+
+      var episode = $('[name=jump_chapter] option:selected')[0].children[0].data.trim();
+      episode = _get(MangaDexHandler.prototype.__proto__ || Object.getPrototypeOf(MangaDexHandler.prototype), 'parseChapter', this).call(this, episode);
+
+      return { source: 'MangaDex', title: title, episode: episode };
+    }
+  }]);
+
+  return MangaDexHandler;
+}(_MediaHandler2.MediaHandler);
+
+},{"../MediaHandler":570}],576:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -119876,7 +119929,7 @@ var MyAnimeList = exports.MyAnimeList = function () {
   return MyAnimeList;
 }();
 
-},{"./Promises":576,"./Roman":577,"./Unicode":579,"lodash":405,"request":471,"xml2js":551}],576:[function(require,module,exports){
+},{"./Promises":577,"./Roman":578,"./Unicode":580,"lodash":405,"request":471,"xml2js":551}],577:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -119949,7 +120002,7 @@ var Promises = exports.Promises = function () {
   return Promises;
 }();
 
-},{"lodash":405}],577:[function(require,module,exports){
+},{"lodash":405}],578:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -120006,7 +120059,7 @@ var Roman = exports.Roman = function () {
   return Roman;
 }();
 
-},{}],578:[function(require,module,exports){
+},{}],579:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -120045,7 +120098,7 @@ var Task = function () {
 
 exports.Task = Task;
 
-},{}],579:[function(require,module,exports){
+},{}],580:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -120083,7 +120136,7 @@ var Unicode = exports.Unicode = function () {
   return Unicode;
 }();
 
-},{"lodash":405}],580:[function(require,module,exports){
+},{"lodash":405}],581:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -120101,13 +120154,15 @@ var _KissMangaHandler = require('./app/handlers/KissMangaHandler');
 
 var _BatotoHandler = require('./app/handlers/BatotoHandler');
 
+var _MangaDexHandler = require('./app/handlers/MangaDexHandler');
+
 var _animeHandler = require('./app/handlers/9animeHandler');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var cheerio = require('cheerio');
 
-var HANDLERS = [new _KissMangaHandler.KissMangaHandler(), new _BatotoHandler.BatotoHandler(), new _animeHandler.NineAnimeHandler()];
+var HANDLERS = [new _KissMangaHandler.KissMangaHandler(), new _BatotoHandler.BatotoHandler(), new _MangaDexHandler.MangaDexHandler(), new _animeHandler.NineAnimeHandler()];
 
 var READ_CACHE = [];
 var INJECTED = [];
@@ -120273,7 +120328,11 @@ new _Task.Task(function () {
                         var status = data.episode === totalEpisodes ? 2 : 1;
                         console.log('status: ' + status);
                         _MyAnimeList.MyAnimeList.updateAnimeList(result.id, status, data.episode).then(function (res) {
-                          console.log('Updated!', status);
+                          if (res.responseCode === 200) {
+                            console.log('Updated!', status);
+                          } else {
+                            console.log('Error!', res);
+                          }
                           READ_CACHE.push(url);
                         });
                       }
@@ -120292,7 +120351,11 @@ new _Task.Task(function () {
                         var status = data.episode === totalChapters ? 2 : 1;
                         console.log('status: ' + status);
                         _MyAnimeList.MyAnimeList.updateMangaList(result.id, status, data.episode).then(function (res) {
-                          console.log('Updated!', status);
+                          if (res.responseCode === 200) {
+                            console.log('Updated!', status);
+                          } else {
+                            console.log('Error!', res);
+                          }
                           READ_CACHE.push(url);
                         });
                       }
@@ -120320,4 +120383,4 @@ new _Task.Task(function () {
 }, 10000).start();
 
 }).call(this,require("buffer").Buffer)
-},{"./app/WebExtension":571,"./app/handlers/9animeHandler":572,"./app/handlers/BatotoHandler":573,"./app/handlers/KissMangaHandler":574,"./app/helpers/MyAnimeList":575,"./app/helpers/Task":578,"buffer":104,"cheerio":107,"lodash":405}]},{},[580]);
+},{"./app/WebExtension":571,"./app/handlers/9animeHandler":572,"./app/handlers/BatotoHandler":573,"./app/handlers/KissMangaHandler":574,"./app/handlers/MangaDexHandler":575,"./app/helpers/MyAnimeList":576,"./app/helpers/Task":579,"buffer":104,"cheerio":107,"lodash":405}]},{},[581]);
