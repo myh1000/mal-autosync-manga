@@ -119412,7 +119412,6 @@ var NineAnimeHandler = exports.NineAnimeHandler = function (_MediaHandler) {
     value: function parseData(source, $) {
       var title = $("h1[class='title']").text();
       var episode = parseInt($("ul[class~='episodes'] > li > a[class='active']").text());
-      episode = _get(NineAnimeHandler.prototype.__proto__ || Object.getPrototypeOf(NineAnimeHandler.prototype), 'parseChapter', this).call(this, episode);
 
       return { source: '9anime', title: title, episode: episode };
     }
