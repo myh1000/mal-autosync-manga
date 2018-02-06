@@ -1,6 +1,7 @@
 import * as _ from 'lodash'
 const request = require('request')
 const xml2js = require('xml2js').parseString
+var FuzzySet = require('fuzzyset.js')
 
 import { Roman } from './Roman'
 import { Promises } from './Promises'
@@ -80,6 +81,19 @@ export class MyAnimeList {
     return this.useAPI(this.mangalist(`update/${id}.xml`), createXMLForm(json))
   }
 
+  static fuzzyCompare (entries, query) {
+    var fs = FuzzySet()
+    for (var e in entries) {
+      var entry = entries[e]
+      fs.add(entry.title.toString())
+    }
+    if (fs.get(query.toString(), null, 0.8) === null) {
+      return entries[0]
+    } else {
+      return entries[fs.values().indexOf(fs.get(query.toString(), null, 0.8)[0][1])]
+    }
+  }
+
   static search (apiURL, query) {
     return new Promise((resolve, reject) =>
       this.useAPI(apiURL, { q: query })
@@ -91,7 +105,7 @@ export class MyAnimeList {
               if (!res) {
                 reject('No matching entry found')
               } else {
-                resolve(apiURL.indexOf('/manga') >= 0 ? res.manga.entry[0] : res.anime.entry[0])
+                resolve(apiURL.indexOf('/manga') >= 0 ? res.manga.entry : res.anime.entry)
               }
             }
           })

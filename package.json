@@ -1,6 +1,6 @@
 {
   "name": "patchouli-chan",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A browser extension that scrobbles what you're reading with MyAnimeList",
   "repository": {
     "type": "git",
@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "cheerio": "^0.22.0",
+    "fuzzyset.js": "0.0.4",
     "lodash": "^4.15.0",
     "request": "^2.74.0",
     "xml2js": "^0.4.17"

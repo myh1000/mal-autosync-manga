@@ -172,10 +172,11 @@ new Task(() => {
                       let data = handler.parseData(source, $)
                       console.log(`source: ${data.source}`)
                       console.log(`title: ${data.title}`)
-                      console.log(`chapter: ${data.episode}`)
                       if (data.source === '9anime') {
+                        console.log(`episode: ${data.episode}`)
                         MyAnimeList.resolveAnimeSearch(data.title)
-                        .then(result => {
+                        .then(entries => {
+                          var result = MyAnimeList.fuzzyCompare(entries, data.title)
                           console.log(`id: ${result.id}`)
                           MyAnimeList.checkEpisode(result.id, 'anime')
                             .then(epCount => {
@@ -189,7 +190,7 @@ new Task(() => {
                                 console.log(`status: ${status}`)
                                 MyAnimeList.updateAnimeList(result.id, status, data.episode)
                                   .then(res => {
-                                    if (res.responseCode === 200) {
+                                    if (!res.responseCode < 400) {
                                       console.log('Updated!', status)
                                     } else {
                                       console.log('Error!', res)
@@ -200,8 +201,10 @@ new Task(() => {
                             })
                         })
                       } else {
+                        console.log(`chapter: ${data.episode}`)
                         MyAnimeList.resolveMangaSearch(data.title)
-                          .then(result => {
+                          .then(entries => {
+                            var result = MyAnimeList.fuzzyCompare(entries, data.title)
                             console.log(`id: ${result.id}`)
                             MyAnimeList.checkEpisode(result.id, 'manga')
                               .then(epCount => {
@@ -215,7 +218,7 @@ new Task(() => {
                                   console.log(`status: ${status}`)
                                   MyAnimeList.updateMangaList(result.id, status, data.episode)
                                     .then(res => {
-                                      if (res.responseCode === 200) {
+                                      if (!res.responseCode < 400) {
                                         console.log('Updated!', status)
                                       } else {
                                         console.log('Error!', res)
