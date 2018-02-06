@@ -120643,7 +120643,7 @@ new _Task.Task(function () {
                         var status = data.episode === totalEpisodes ? 2 : 1;
                         console.log('status: ' + status);
                         _MyAnimeList.MyAnimeList.updateAnimeList(result.id, status, data.episode).then(function (res) {
-                          if (!res.responseCode < 400) {
+                          if (res.responseCode < 400) {
                             console.log('Updated!', status);
                           } else {
                             console.log('Error!', res);
@@ -120668,7 +120668,7 @@ new _Task.Task(function () {
                         var status = data.episode === totalChapters ? 2 : 1;
                         console.log('status: ' + status);
                         _MyAnimeList.MyAnimeList.updateMangaList(result.id, status, data.episode).then(function (res) {
-                          if (!res.responseCode < 400) {
+                          if (res.responseCode < 400) {
                             console.log('Updated!', status);
                           } else {
                             console.log('Error!', res);

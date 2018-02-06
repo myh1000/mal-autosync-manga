@@ -190,7 +190,7 @@ new Task(() => {
                                 console.log(`status: ${status}`)
                                 MyAnimeList.updateAnimeList(result.id, status, data.episode)
                                   .then(res => {
-                                    if (!res.responseCode < 400) {
+                                    if (res.responseCode < 400) {
                                       console.log('Updated!', status)
                                     } else {
                                       console.log('Error!', res)
@@ -218,7 +218,7 @@ new Task(() => {
                                   console.log(`status: ${status}`)
                                   MyAnimeList.updateMangaList(result.id, status, data.episode)
                                     .then(res => {
-                                      if (!res.responseCode < 400) {
+                                      if (res.responseCode < 400) {
                                         console.log('Updated!', status)
                                       } else {
                                         console.log('Error!', res)
