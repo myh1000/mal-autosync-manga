@@ -83,14 +83,18 @@ export class MyAnimeList {
 
   static fuzzyCompare (entries, query) {
     var fs = FuzzySet()
+    var actualEntries = []
     for (var e in entries) {
       var entry = entries[e]
-      fs.add(entry.title.toString())
+      if (entry.type.toString() !== 'Novel') {
+        actualEntries.push(entry)
+        fs.add(entry.title.toString())
+      }
     }
     if (fs.get(query.toString(), null, 0.8) === null) {
-      return entries[0]
+      return actualEntries[0]
     } else {
-      return entries[fs.values().indexOf(fs.get(query.toString(), null, 0.8)[0][1])]
+      return actualEntries[fs.values().indexOf(fs.get(query.toString(), null, 0.8)[0][1])]
     }
   }
 

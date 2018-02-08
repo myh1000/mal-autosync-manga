@@ -17,6 +17,7 @@ const HANDLERS = [
 ]
 
 const READ_CACHE = []
+const READ_CACHE_TITLE = []
 const INJECTED = []
 const CYCLES = {}
 
@@ -118,6 +119,7 @@ chrome.runtime.onConnect.addListener((port) => {
           checkCredentials()
             .then(storage => {
               storage.action = 'requestCreds'
+              storage.READ_CACHE_TITLE = READ_CACHE_TITLE
               port.postMessage(storage)
             })
           break
@@ -183,7 +185,8 @@ new Task(() => {
                               console.log(`Updating MyAnimeList... MAL count: ${epCount}`)
                               if (data.episode <= epCount) {
                                 console.log('Already up to date')
-                                READ_CACHE.push(url)
+                                READ_CACHE.unshift(url)
+                                READ_CACHE_TITLE.unshift([data.title, 'anime/' + result.id])
                               } else {
                                 let totalEpisodes = parseInt(result.episodes[0])
                                 let status = (data.episode === totalEpisodes ? 2 : 1)
@@ -195,7 +198,8 @@ new Task(() => {
                                     } else {
                                       console.log('Error!', res)
                                     }
-                                    READ_CACHE.push(url)
+                                    READ_CACHE.unshift(url)
+                                    READ_CACHE_TITLE.unshift([data.title, 'anime/' + result.id])
                                   })
                               }
                             })
@@ -211,7 +215,8 @@ new Task(() => {
                                 console.log(`Updating MyAnimeList... MAL count: ${epCount}`)
                                 if (data.episode <= epCount) {
                                   console.log('Already up to date')
-                                  READ_CACHE.push(url)
+                                  READ_CACHE.unshift(url)
+                                  READ_CACHE_TITLE.unshift([data.title, 'manga/' + result.id])
                                 } else {
                                   let totalChapters = parseInt(result.chapters[0])
                                   let status = (data.episode === totalChapters ? 2 : 1)
@@ -223,7 +228,8 @@ new Task(() => {
                                       } else {
                                         console.log('Error!', res)
                                       }
-                                      READ_CACHE.push(url)
+                                      READ_CACHE.unshift(url)
+                                      READ_CACHE_TITLE.unshift([data.title, 'manga/' + result.id])
                                     })
                                 }
                               })

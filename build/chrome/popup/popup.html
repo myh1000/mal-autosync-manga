@@ -20,6 +20,7 @@
         display: block;
         text-align: center;
         padding-bottom: 10px;
+        white-space: pre-line;
       }
       span.donate {
         display: inline;
@@ -31,7 +32,7 @@
         float: right;
         padding-bottom: 15px;
       }
-      a:link, :visited, :active {
+      a:link, a:visited, a:active {
         color: #52A0B7;
       }
       a:hover {
@@ -46,9 +47,9 @@
     <label for="pass">Password:</label>
     <input type="password" id="pass"><br><br>
     <input type="submit" id="save" value="Save credentials" /><br><br>
-    <label for="user">Just login with your MAL and start reading!</label>
+    <label id="info">Just login with your MAL and start reading!</label>
     </div>
-    <span class="author"><a href="https://github.com/myh1000/mal-autosync-manga/#currently-supported-sites" target="blank">See Supported Sites</a></span>
+    <span class="author"><a href="https://github.com/myh1000/mal-autosync-manga/#currently-supported-sites" target="_blank">See Supported Sites</a></span>
     <script src="popup.js"></script>
   </body>
 </html>

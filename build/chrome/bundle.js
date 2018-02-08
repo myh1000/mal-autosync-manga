@@ -120009,14 +120009,18 @@ var MyAnimeList = exports.MyAnimeList = function () {
     key: 'fuzzyCompare',
     value: function fuzzyCompare(entries, query) {
       var fs = FuzzySet();
+      var actualEntries = [];
       for (var e in entries) {
         var entry = entries[e];
-        fs.add(entry.title.toString());
+        if (entry.type.toString() !== 'Novel') {
+          actualEntries.push(entry);
+          fs.add(entry.title.toString());
+        }
       }
       if (fs.get(query.toString(), null, 0.8) === null) {
-        return entries[0];
+        return actualEntries[0];
       } else {
-        return entries[fs.values().indexOf(fs.get(query.toString(), null, 0.8)[0][1])];
+        return actualEntries[fs.values().indexOf(fs.get(query.toString(), null, 0.8)[0][1])];
       }
     }
   }, {
@@ -120479,6 +120483,7 @@ var cheerio = require('cheerio');
 var HANDLERS = [new _KissMangaHandler.KissMangaHandler(), new _BatotoHandler.BatotoHandler(), new _MangaDexHandler.MangaDexHandler(), new _animeHandler.NineAnimeHandler()];
 
 var READ_CACHE = [];
+var READ_CACHE_TITLE = [];
 var INJECTED = [];
 var CYCLES = {};
 
@@ -120577,6 +120582,7 @@ chrome.runtime.onConnect.addListener(function (port) {
         case 'requestCreds':
           checkCredentials().then(function (storage) {
             storage.action = 'requestCreds';
+            storage.READ_CACHE_TITLE = READ_CACHE_TITLE;
             port.postMessage(storage);
           });
           break;
@@ -120637,18 +120643,20 @@ new _Task.Task(function () {
                       console.log('Updating MyAnimeList... MAL count: ' + epCount);
                       if (data.episode <= epCount) {
                         console.log('Already up to date');
-                        READ_CACHE.push(url);
+                        READ_CACHE.unshift(url);
+                        READ_CACHE_TITLE.unshift([data.title, 'anime/' + result.id]);
                       } else {
                         var totalEpisodes = parseInt(result.episodes[0]);
                         var status = data.episode === totalEpisodes ? 2 : 1;
                         console.log('status: ' + status);
                         _MyAnimeList.MyAnimeList.updateAnimeList(result.id, status, data.episode).then(function (res) {
-                          if (!res.responseCode < 400) {
+                          if (res.responseCode < 400) {
                             console.log('Updated!', status);
                           } else {
                             console.log('Error!', res);
                           }
-                          READ_CACHE.push(url);
+                          READ_CACHE.unshift(url);
+                          READ_CACHE_TITLE.unshift([data.title, 'anime/' + result.id]);
                         });
                       }
                     });
@@ -120662,18 +120670,20 @@ new _Task.Task(function () {
                       console.log('Updating MyAnimeList... MAL count: ' + epCount);
                       if (data.episode <= epCount) {
                         console.log('Already up to date');
-                        READ_CACHE.push(url);
+                        READ_CACHE.unshift(url);
+                        READ_CACHE_TITLE.unshift([data.title, 'manga/' + result.id]);
                       } else {
                         var totalChapters = parseInt(result.chapters[0]);
                         var status = data.episode === totalChapters ? 2 : 1;
                         console.log('status: ' + status);
                         _MyAnimeList.MyAnimeList.updateMangaList(result.id, status, data.episode).then(function (res) {
-                          if (!res.responseCode < 400) {
+                          if (res.responseCode < 400) {
                             console.log('Updated!', status);
                           } else {
                             console.log('Error!', res);
                           }
-                          READ_CACHE.push(url);
+                          READ_CACHE.unshift(url);
+                          READ_CACHE_TITLE.unshift([data.title, 'manga/' + result.id]);
                         });
                       }
                     });
