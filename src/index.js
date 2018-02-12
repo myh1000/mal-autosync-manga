@@ -7,12 +7,14 @@ import { MyAnimeList } from './app/helpers/MyAnimeList'
 import { KissMangaHandler } from './app/handlers/KissMangaHandler'
 import { BatotoHandler } from './app/handlers/BatotoHandler'
 import { MangaDexHandler } from './app/handlers/MangaDexHandler'
+import { MangaReaderHandler } from './app/handlers/MangaReaderHandler'
 import { NineAnimeHandler } from './app/handlers/9animeHandler'
 
 const HANDLERS = [
   new KissMangaHandler(),
   new BatotoHandler(),
   new MangaDexHandler(),
+  new MangaReaderHandler(),
   new NineAnimeHandler()
 ]
 

@@ -36,10 +36,11 @@ export class MediaHandler {
     }
 
     if ((result = string.match(/(\d+(\.\d+)?)/g))) {
-      if (result[0].match(/\.+(\d+)/g)) {
-        return parseFloat(result[0].replace(result[0].match(/\.+(\d+)/g), '.' + (parseFloat(result[0].match(/\.+(\d+)/)[1]))))
+      var res = result[result.length - 1]
+      if (res.match(/\.+(\d+)/g)) {
+        return parseFloat(res.replace(res.match(/\.+(\d+)/g), '.' + (parseFloat(res.match(/\.+(\d+)/)[1]))))
       } else {
-        return parseFloat(result[0])
+        return parseFloat(res)
       }
     }
     // if all else fails

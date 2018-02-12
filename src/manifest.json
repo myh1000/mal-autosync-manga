@@ -3,7 +3,7 @@
 
   "name": "patchouli-chan: auto-sync your MAL",
   "short_name": "patchouli-chan",
-  "version": "1.1",
+  "version": "1.1.1",
   "author": "myh1000",
   "description": "patchouli-chan syncs MyAnimeList with what you're reading or watching.",
   "homepage_url": "https://github.com/myh1000/mal-autosync-manga",
@@ -20,7 +20,7 @@
 
   "content_scripts": [
     {
-      "matches": ["*://kissmanga.com/*","*://bato.to/*","*://9anime.is/*","*://mangadex.com/*"],
+      "matches": ["*://kissmanga.com/*","*://bato.to/*","*://9anime.is/*","*://mangadex.com/*","*://mangareader.net/*"],
       "js": ["content.js"],
       "run_at": "document_end"
     }
@@ -33,16 +33,8 @@
   },
 
   "permissions": [
-    "http://bato.to/",
-    "https://bato.to/",
-    "http://9anime.is/",
-    "https://9anime.is/",
-    "http://kissmanga.com/",
-    "https://kissmanga.com/",
-    "http://mangadex.com/",
-    "https://mangadex.com/",
-    "http://myanimelist.net/",
-    "https://myanimelist.net/",
+    "https://*/*",
+    "http://*/*",
     "background",
     "notifications",
     "tabs",

@@ -119567,10 +119567,11 @@ var MediaHandler = exports.MediaHandler = function () {
       }
 
       if (result = string.match(/(\d+(\.\d+)?)/g)) {
-        if (result[0].match(/\.+(\d+)/g)) {
-          return parseFloat(result[0].replace(result[0].match(/\.+(\d+)/g), '.' + parseFloat(result[0].match(/\.+(\d+)/)[1])));
+        var res = result[result.length - 1];
+        if (res.match(/\.+(\d+)/g)) {
+          return parseFloat(res.replace(res.match(/\.+(\d+)/g), '.' + parseFloat(res.match(/\.+(\d+)/)[1])));
         } else {
-          return parseFloat(result[0]);
+          return parseFloat(res);
         }
       }
       // if all else fails
@@ -119877,7 +119878,7 @@ var MangaDexHandler = exports.MangaDexHandler = function (_MediaHandler) {
   }, {
     key: 'parseData',
     value: function parseData(source, $) {
-      var title = $('div[id=content]').find('a')[0].children[0].data.trim();
+      var title = $('span[title=Title]')[0].nextSibling.next.children[0].data.trim();
 
       var episode = $('[name=jump_chapter] option:selected')[0].children[0].data.trim();
       episode = _get(MangaDexHandler.prototype.__proto__ || Object.getPrototypeOf(MangaDexHandler.prototype), 'parseChapter', this).call(this, episode);
@@ -119890,6 +119891,61 @@ var MangaDexHandler = exports.MangaDexHandler = function (_MediaHandler) {
 }(_MediaHandler2.MediaHandler);
 
 },{"../MediaHandler":572}],578:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.MangaReaderHandler = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
+
+var _MediaHandler2 = require('../MediaHandler');
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var MangaReaderHandler = exports.MangaReaderHandler = function (_MediaHandler) {
+  _inherits(MangaReaderHandler, _MediaHandler);
+
+  function MangaReaderHandler() {
+    _classCallCheck(this, MangaReaderHandler);
+
+    return _possibleConstructorReturn(this, (MangaReaderHandler.__proto__ || Object.getPrototypeOf(MangaReaderHandler)).apply(this, arguments));
+  }
+
+  _createClass(MangaReaderHandler, [{
+    key: 'accept',
+    value: function accept(url) {
+      return url.indexOf('mangareader.net') >= 0 && !isNaN(url.split('/')[4]) && (url.match(/\//g) || []).length >= 4;
+    }
+  }, {
+    key: 'verify',
+    value: function verify(source, cycle, $) {
+      return _get(MangaReaderHandler.prototype.__proto__ || Object.getPrototypeOf(MangaReaderHandler.prototype), 'lifeOf', this).call(this, cycle) > _MediaHandler2.MIN_CYCLE;
+    }
+  }, {
+    key: 'parseData',
+    value: function parseData(source, $) {
+      var title = $('title')[0].children[0].data.split('-')[0].trim();
+      var episode = _get(MangaReaderHandler.prototype.__proto__ || Object.getPrototypeOf(MangaReaderHandler.prototype), 'parseChapter', this).call(this, title);
+      title = title.substring(0, title.lastIndexOf(' '));
+
+      console.log(title, episode);
+
+      return { source: 'MangaReader', title: title, episode: episode };
+    }
+  }]);
+
+  return MangaReaderHandler;
+}(_MediaHandler2.MediaHandler);
+
+},{"../MediaHandler":572}],579:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -120247,7 +120303,7 @@ var MyAnimeList = exports.MyAnimeList = function () {
   return MyAnimeList;
 }();
 
-},{"./Promises":579,"./Roman":580,"./Unicode":582,"fuzzyset.js":193,"lodash":407,"request":473,"xml2js":553}],579:[function(require,module,exports){
+},{"./Promises":580,"./Roman":581,"./Unicode":583,"fuzzyset.js":193,"lodash":407,"request":473,"xml2js":553}],580:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -120320,7 +120376,7 @@ var Promises = exports.Promises = function () {
   return Promises;
 }();
 
-},{"lodash":407}],580:[function(require,module,exports){
+},{"lodash":407}],581:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -120377,7 +120433,7 @@ var Roman = exports.Roman = function () {
   return Roman;
 }();
 
-},{}],581:[function(require,module,exports){
+},{}],582:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -120416,7 +120472,7 @@ var Task = function () {
 
 exports.Task = Task;
 
-},{}],582:[function(require,module,exports){
+},{}],583:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -120454,7 +120510,7 @@ var Unicode = exports.Unicode = function () {
   return Unicode;
 }();
 
-},{"lodash":407}],583:[function(require,module,exports){
+},{"lodash":407}],584:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -120474,13 +120530,15 @@ var _BatotoHandler = require('./app/handlers/BatotoHandler');
 
 var _MangaDexHandler = require('./app/handlers/MangaDexHandler');
 
+var _MangaReaderHandler = require('./app/handlers/MangaReaderHandler');
+
 var _animeHandler = require('./app/handlers/9animeHandler');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var cheerio = require('cheerio');
 
-var HANDLERS = [new _KissMangaHandler.KissMangaHandler(), new _BatotoHandler.BatotoHandler(), new _MangaDexHandler.MangaDexHandler(), new _animeHandler.NineAnimeHandler()];
+var HANDLERS = [new _KissMangaHandler.KissMangaHandler(), new _BatotoHandler.BatotoHandler(), new _MangaDexHandler.MangaDexHandler(), new _MangaReaderHandler.MangaReaderHandler(), new _animeHandler.NineAnimeHandler()];
 
 var READ_CACHE = [];
 var READ_CACHE_TITLE = [];
@@ -120710,4 +120768,4 @@ new _Task.Task(function () {
 }, 10000).start();
 
 }).call(this,require("buffer").Buffer)
-},{"./app/WebExtension":573,"./app/handlers/9animeHandler":574,"./app/handlers/BatotoHandler":575,"./app/handlers/KissMangaHandler":576,"./app/handlers/MangaDexHandler":577,"./app/helpers/MyAnimeList":578,"./app/helpers/Task":581,"buffer":104,"cheerio":107,"lodash":407}]},{},[583]);
+},{"./app/WebExtension":573,"./app/handlers/9animeHandler":574,"./app/handlers/BatotoHandler":575,"./app/handlers/KissMangaHandler":576,"./app/handlers/MangaDexHandler":577,"./app/handlers/MangaReaderHandler":578,"./app/helpers/MyAnimeList":579,"./app/helpers/Task":582,"buffer":104,"cheerio":107,"lodash":407}]},{},[584]);

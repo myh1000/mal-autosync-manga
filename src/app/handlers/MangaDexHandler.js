@@ -11,7 +11,7 @@ export class MangaDexHandler extends MediaHandler {
   }
 
   parseData (source, $) {
-    let title = $('div[id=content]').find('a')[0].children[0].data.trim()
+    let title = $('span[title=Title]')[0].nextSibling.next.children[0].data.trim()
 
     let episode = $('[name=jump_chapter] option:selected')[0].children[0].data.trim()
     episode = super.parseChapter(episode)
