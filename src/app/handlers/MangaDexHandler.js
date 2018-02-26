@@ -3,7 +3,7 @@ import { MediaHandler, MIN_CYCLE } from '../MediaHandler'
 export class MangaDexHandler extends MediaHandler {
 
   accept (url) {
-    return url.indexOf('mangadex.com') >= 0 && url.split('/')[3].toLowerCase() === 'chapter' && (url.match(/\//g) || []).length === 5
+    return url.indexOf('mangadex.com') >= 0 && url.split('/')[3].toLowerCase() === 'chapter' && (url.match(/\//g) || []).length >= 4
   }
 
   verify (source, cycle, $) {
