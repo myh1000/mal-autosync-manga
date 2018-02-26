@@ -1,6 +1,6 @@
 {
   "name": "patchouli-chan",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A browser extension that scrobbles what you're reading with MyAnimeList",
   "repository": {
     "type": "git",
@@ -11,6 +11,7 @@
   "scripts": {
     "build": "npm run lint && gulp chrome",
     "buildf": "npm run lint && gulp firefox",
+    "builda": "npm run lint && gulp chrome && gulp firefox",
     "lint": "eslint src"
   },
   "dependencies": {
