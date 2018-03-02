@@ -119868,7 +119868,7 @@ var MangaDexHandler = exports.MangaDexHandler = function (_MediaHandler) {
   _createClass(MangaDexHandler, [{
     key: 'accept',
     value: function accept(url) {
-      return url.indexOf('mangadex.com') >= 0 && url.split('/')[3].toLowerCase() === 'chapter' && (url.match(/\//g) || []).length >= 4;
+      return (url.indexOf('mangadex.com') >= 0 || url.indexOf('mangadex.org') >= 0) && url.split('/')[3].toLowerCase() === 'chapter' && (url.match(/\//g) || []).length >= 4;
     }
   }, {
     key: 'verify',

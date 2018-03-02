@@ -20,7 +20,7 @@
 
   "content_scripts": [
     {
-      "matches": ["*://kissmanga.com/*","*://bato.to/*","*://9anime.is/*","*://mangadex.com/*","*://mangareader.net/*"],
+      "matches": ["*://kissmanga.com/*","*://bato.to/*","*://9anime.is/*","*://mangadex.com/*","*://mangadex.org/*","*://mangareader.net/*"],
       "js": ["content.js"],
       "run_at": "document_end"
     }
