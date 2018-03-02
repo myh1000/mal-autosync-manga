@@ -3,7 +3,7 @@
 
   "name": "patchouli-chan: auto-sync your MAL",
   "short_name": "patchouli-chan",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "author": "myh1000",
   "description": "patchouli-chan syncs MyAnimeList with what you're reading or watching.",
   "homepage_url": "https://github.com/myh1000/mal-autosync-manga",
