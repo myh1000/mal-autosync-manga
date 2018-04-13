@@ -119878,7 +119878,7 @@ var MangaDexHandler = exports.MangaDexHandler = function (_MediaHandler) {
   }, {
     key: 'parseData',
     value: function parseData(source, $) {
-      var title = $('span[title=Title]')[0].nextSibling.next.children[0].data.trim();
+      var title = /\(([^)]+)\)/.exec($('title')[0].children[0].data.trim())[1];
 
       var episode = $('[name=jump_chapter] option:selected')[0].children[0].data.trim();
       episode = _get(MangaDexHandler.prototype.__proto__ || Object.getPrototypeOf(MangaDexHandler.prototype), 'parseChapter', this).call(this, episode);
